@@ -1,0 +1,22 @@
+{
+  "name": "riteshsolanki-api",
+  "version": "1.0.0",
+  "description": "Api to support my personal portfolio",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.0.3"
+  },
+  "dependencies": {
+    "@sendgrid/mail": "^8.1.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.1",
+    "express": "^4.18.2",
+    "handlebars": "^4.7.8"
+  }
+}
