@@ -6,7 +6,7 @@ var handlebars = require('handlebars');
 var fs = require('fs');
 
 // Setup Send Grid with Valid API Key
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+sgMail.setApiKey('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');
 
 // Function used to send email
 const sendEmail = (objUser) => {
