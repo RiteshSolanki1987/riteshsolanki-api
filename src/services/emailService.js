@@ -10,32 +10,37 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 // Function used to send email
 const sendEmail = (objUser) => {
-    const { fullname, email, subject, message } = objUser;
+    return new Promise((resolve, reject) => {
+        const { fullname, email, subject, message } = objUser;
 
-    readHTMLFile(__dirname + '/templates/Welcome.html', function(err, html) {
-        if (err) {
-           console.log('error reading file', err);
-           return;
-        }
-        var template = handlebars.compile(html);
-        var replacements = {
-            subject: subject,
-            From: email,
-            User: fullname,
-            message: message
-        };
-        var htmlToSend = template(replacements);
-        htmlToSend = htmlToSend.replace("[subject]", subject);
-        htmlToSend = htmlToSend.replace("[From]", email);
-        htmlToSend = htmlToSend.replace("[User]", fullname);
-        htmlToSend = htmlToSend.replace("[message]", message);
-        const data = {
-            to: process.env.SENDGRID_MAIL_TO,
-            from: process.env.SENDGRID_MAIL_FROM,
-            subject: subject,
-            html: htmlToSend
-        }
-        sgMail.send(data);
+        readHTMLFile(__dirname + '/templates/Welcome.html', function(err, html) {
+            if (err) {
+            console.log('error reading file', err);
+            return;
+            }
+            var template = handlebars.compile(html);
+            var replacements = {
+                subject: subject,
+                From: email,
+                User: fullname,
+                message: message
+            };
+            var htmlToSend = template(replacements);
+            htmlToSend = htmlToSend.replace("[subject]", subject);
+            htmlToSend = htmlToSend.replace("[From]", email);
+            htmlToSend = htmlToSend.replace("[User]", fullname);
+            htmlToSend = htmlToSend.replace("[message]", message);
+            const data = {
+                to: process.env.SENDGRID_MAIL_TO,
+                from: process.env.SENDGRID_MAIL_FROM,
+                subject: subject,
+                html: htmlToSend
+            }
+            // sgMail.send(data);
+            sgMail.send(data)
+                .then((response) => {resolve(response); })
+                .catch((error) => {reject(error) })
+        });
     });
 }
 
