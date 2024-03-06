@@ -8,8 +8,15 @@ var fs = require('fs');
 // Setup Send Grid with Valid API Key
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
+const ping = () => {
+    return;
+}
+
 // Function used to send email
 const sendEmail = (objUser) => {
+    console.log('service calling...');
+    console.log('objUser', objUser);
+    console.log('SENDGRID_API_KEY', process.env.SENDGRID_API_KEY)
     return new Promise((resolve, reject) => {
         const { fullname, email, subject, message } = objUser;
 
@@ -57,5 +64,6 @@ var readHTMLFile = function(path, callback) {
 };
 
 module.exports = {
+    ping,
     sendEmail
 };

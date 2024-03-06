@@ -2,7 +2,7 @@
 const express = require("express"); 
 const cors = require("cors");
 const app = express(); 
-const PORT = process.env.PORT || 4000; 
+const PORT = process.env.PORT || 8083; 
 
 var corsOptions = {
     // url1: "http://localhost:3000",
@@ -16,6 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 const v1EmailRouter = require("./v1/routes/emailRoutes");
 
 // *** ADD ***
+app.use("/api/v1/ping", v1EmailRouter);
 app.use("/api/v1/email", v1EmailRouter);
 
 app.listen(PORT, () => { 
